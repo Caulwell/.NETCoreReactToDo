@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import styled from "styled-components";
 import TaskList from "./components/TaskList";
 import TaskMaker from "./components/TaskMaker";
@@ -27,18 +27,29 @@ function App() {
 
   const [tasks, setTasks] = useState([]);
 
+  const [initialRender, setInitialRender] = useState(true);
+
 
   useEffect(() => {
+      console.log("initial render to api");
+      fetch('http://localhost:5213/api/todoitem', {method: "GET"})
+      .then(response => response.json())
+      .then(data => setTasks(data));
 
-    if(tasks.length !== 0){
-      console.log("call to api");
-    }
+      setInitialRender(false);
 
-  }, [tasks]);
+  }, []);
 
 
   const createTask = (name, time) => {
+
     setTasks([...tasks, {name, time}]);
+
+    fetch('http://localhost:5213/api/todoitem', {
+    method: "POST",
+    body: JSON.stringify({name, time})
+  })
+    .then(response => console.log(response));
   };
 
 
