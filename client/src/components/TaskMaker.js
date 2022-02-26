@@ -7,19 +7,47 @@ const StyledTaskMaker = styled.div`
     box-sizing: border-box;
     width: 100%;
     height: 6rem;
-    border: 2px solid grey;
+    border: 2px solid #ccc;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     border-radius: 3px;
-    padding: 0.3rem;
+    padding: 0.4rem;
 `;
 
 const Input = styled.input`
+    font-size: 1.5rem;
+    flex-grow: 2;
     border: none;
     padding: 0.2rem;
+    width: 100%;
+    &:focus {
+        outline: none;
+    }
     
 `;
+
+const OptionsDiv = styled.div`
+    flex-grow: 1;
+    display: flex;
+    justify-content: flex-end;
+`;
+
+const Button = styled.button`
+    border-radius: 7%;
+    height: 2.2rem;
+    width: 6rem;
+    border: 1px solid #ccc;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    &:hover{
+        cursor: pointer;
+    }
+`;
+
+
+
 
 
 
@@ -30,6 +58,7 @@ function TaskMaker({createTask}) {
     const handleCreateTask = () => {
         
         createTask(inputValue);
+        setInputValue("");
 
     }
 
@@ -42,9 +71,12 @@ function TaskMaker({createTask}) {
 
         </Input>
 
-        <button onClick={() => handleCreateTask()}>
-            Create {save()}
-        </button>
+        <OptionsDiv>
+            <Button onClick={() => handleCreateTask()}>
+                Create {save()}
+            </Button>
+        </OptionsDiv>
+        
         
     </StyledTaskMaker>
   );

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import styled from "styled-components";
-import {bin, pen, tick} from "../svg/svgs";
+import {bin, pen, save, tick} from "../svg/svgs";
 
 
 
@@ -8,18 +8,34 @@ const StyledTask = styled.div`
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
     transition: 0.3s;
     box-sizing: border-box;
-    padding: 0.3rem;
+    padding: 1rem;
     width: 100%;
     display: flex;
-    flex-direction: column;
     justify-content: space-between;
-    margin-top: 0.5rem;
+    align-items: center;
+    margin-top: 2rem;
 
 `;
 
-const StyledTaskMain = styled.div`
+
+const Button = styled.button`
+    border-radius: 50%;
+    height: 2rem;
+    width: 2rem;
+    border: 1px solid #ccc;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    &:hover{
+        cursor: pointer;
+    }
+`;
+
+const ButtonGroup = styled.div`
+    width: 30%;
     display: flex;
     justify-content: space-between;
+
 `;
 
 
@@ -54,37 +70,35 @@ function Task({task, deleteTask, editTask}) {
         taskCopy.name = inputValue;
         editTask(taskCopy);
         setEditing(false);
-    }
+    };
 
     return (
         <StyledTask>
 
-        <StyledTaskMain>
+        
         {editing ? 
         
         <>
             <input onChange={e => setInputValue(e.target.value)} value={inputValue}></input>
-            <button onClick={() => handleEdit()}>Save</button>
-            <button onClick={() => handleEditMode()}>Cancel</button>
+            <Button onClick={() => handleEdit()}>{save()}</Button>
+            <Button onClick={() => handleEditMode()}>Cancel</Button>
         </>
 
         :
         <>
             <h1>{task.name}</h1>
-            <div>
-                <button onClick={() => handleComplete()}>{tick()}</button>
-                <button onClick={() => handleEditMode()}>{pen()}</button>
-                <button onClick={() => handleBin()}>{bin()}</button>
-            </div>
+            <ButtonGroup>
+                <Button onClick={() => handleComplete()}>{tick()}</Button>
+                <Button onClick={() => handleEditMode()}>{pen()}</Button>
+                <Button onClick={() => handleBin()}>{bin()}</Button>
+                </ButtonGroup>
         </>
        
        
         
 
         }
-        
-
-        </StyledTaskMain>
+    
     
 
         </StyledTask>

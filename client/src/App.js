@@ -18,9 +18,24 @@ const Header = styled.div`
   width: 100%;
   display: flex;
   justify-content: space-between;
+  align-items: center;
   font-family: "Chakra Petch", sans serif;
 
 `;
+
+const Button = styled.button`
+    border-radius: 50%;
+    height: 2rem;
+    width: 2rem;
+    border: 1px solid #ccc;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    &:hover{
+        cursor: pointer;
+    }
+`;
+
 
 
 
@@ -92,7 +107,7 @@ function App() {
     <StyledApp className="App">
       <Header>
         <h1>QuickTask</h1>
-        <button>{menu()}</button> 
+        <Button>{menu()}</Button> 
       </Header>
       <TaskMaker createTask={createTask}/>
       <TaskList tasks={tasks} deleteTask={deleteTask} editTask={editTask}/>
