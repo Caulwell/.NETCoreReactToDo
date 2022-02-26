@@ -18,6 +18,10 @@ const Input = styled.input`
     
 `;
 
+const handleRegister = () => {
+    
+}
+
 
 function Auth() {
 
@@ -32,13 +36,13 @@ function Auth() {
     return (
         <StyledAuth>
         <AuthDiv>
-            <Input value={loginEmail} onChange={e => setLoginEmail(e.target.value)} type="text" placeholder="Email">
+            <Input value={registerEmail} onChange={e => setRegisterEmail(e.target.value)} type="text" placeholder="Email">
             </Input>
             <Input value={registerPassword1} onChange={e => setRegisterPassword1(e.target.value)} type="text" placeholder="Password">
             </Input>
             <Input value={registerPassword2} onChange={e => setRegisterPassword2(e.target.value)} type="text" placeholder="Repeat Password">
             </Input>
-            <button>REGISTER</button>
+            <button onClick={handleRegister}>REGISTER</button>
         </AuthDiv>
         <AuthDiv>
             <Input value={loginEmail} onChange={e => setLoginEmail(e.target.value)} type="text" placeholder="Email">

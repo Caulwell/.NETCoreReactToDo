@@ -32,7 +32,7 @@ function App() {
 
   useEffect(() => {
       console.log("initial render to api");
-      fetch('http://localhost:5213/api/getAll', {method: "GET"})
+      fetch('http://localhost:5025/api/Todoitems', {method: "GET"})
       .then(response => response.json())
       .then(data => setTasks(data));
 
@@ -45,7 +45,7 @@ function App() {
 
     setTasks([...tasks, {name, time}]);
 
-    fetch('http://localhost:5213/api/add', {
+    fetch('http://localhost:5025/api/Todoitems', {
     method: "POST",
     headers: {'Content-Type': 'application/json'},
     body: JSON.stringify({name, time})
