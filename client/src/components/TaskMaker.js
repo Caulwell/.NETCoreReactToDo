@@ -1,5 +1,6 @@
 import { useState } from "react";
 import styled from "styled-components";
+import { save } from "../svg/svgs";
 
 const StyledTaskMaker = styled.div`
     margin-top: 1rem;
@@ -42,7 +43,7 @@ function TaskMaker({createTask}) {
         </Input>
 
         <button onClick={() => handleCreateTask()}>
-            Create
+            Create {save()}
         </button>
         
     </StyledTaskMaker>

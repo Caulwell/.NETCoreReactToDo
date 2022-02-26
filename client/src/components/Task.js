@@ -1,5 +1,6 @@
 import { useState } from "react";
 import styled from "styled-components";
+import {bin, pen, tick} from "../svg/svgs";
 
 
 
@@ -71,9 +72,9 @@ function Task({task, deleteTask, editTask}) {
         <>
             <h1>{task.name}</h1>
             <div>
-                <button onClick={() => handleComplete()}>{task.isComplete ? "Not Complete" : "Complete"}</button>
-                <button onClick={() => handleEditMode()}>Edit</button>
-                <button onClick={() => handleBin()}>Bin</button>
+                <button onClick={() => handleComplete()}>{tick()}</button>
+                <button onClick={() => handleEditMode()}>{pen()}</button>
+                <button onClick={() => handleBin()}>{bin()}</button>
             </div>
         </>
        

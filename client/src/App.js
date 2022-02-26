@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import styled from "styled-components";
 import TaskList from "./components/TaskList";
 import TaskMaker from "./components/TaskMaker";
-import Auth from "./components/Auth";
+import {menu} from "./svg/svgs";
 
 
 const StyledApp = styled.div`
@@ -18,6 +18,7 @@ const Header = styled.div`
   width: 100%;
   display: flex;
   justify-content: space-between;
+  font-family: "Chakra Petch", sans serif;
 
 `;
 
@@ -89,10 +90,9 @@ function App() {
 
   return (
     <StyledApp className="App">
-      <Auth/>
       <Header>
-        <h1>ToDo App</h1>
-        <button>settings</button> 
+        <h1>QuickTask</h1>
+        <button>{menu()}</button> 
       </Header>
       <TaskMaker createTask={createTask}/>
       <TaskList tasks={tasks} deleteTask={deleteTask} editTask={editTask}/>

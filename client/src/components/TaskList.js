@@ -7,6 +7,7 @@ const StyledTaskList = styled.div`
     width: 100%;
     display: flex;
     flex-direction: column;
+    font-family: "Chakra Petch", sans serif;
 `;
 
 
