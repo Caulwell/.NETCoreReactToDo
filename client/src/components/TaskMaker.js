@@ -26,11 +26,10 @@ const Input = styled.input`
 function TaskMaker({createTask}) {
 
     const [inputValue, setInputValue] = useState("");
-    const [timeValue, setTimeValue] = useState(1);
 
     const handleCreateTask = () => {
         
-        createTask(inputValue, timeValue);
+        createTask(inputValue);
 
     }
 
@@ -43,7 +42,7 @@ function TaskMaker({createTask}) {
 
         </Input>
 
-        <ControlPanel createTask={handleCreateTask} timeValue={timeValue} setTimeValue={setTimeValue}/>
+        <ControlPanel createTask={handleCreateTask}/>
         
     </StyledTaskMaker>
   );

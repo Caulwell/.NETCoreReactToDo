@@ -10,14 +10,14 @@ const StyledTaskList = styled.div`
 `;
 
 
-function TaskList({tasks}) {
+function TaskList({tasks, deleteTask}) {
 
 
   return (
     <StyledTaskList>
 
     {tasks.map(task => (
-        <Task key={uuidv4()} name={task.name} time={task.time}/>
+        <Task key={"task"+task.id} task={task} deleteTask={deleteTask}/>
     ))}
 
     </StyledTaskList>

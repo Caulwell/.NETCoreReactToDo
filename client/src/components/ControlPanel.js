@@ -1,6 +1,5 @@
 import { useState } from "react";
 import styled from "styled-components";
-import { v4 as uuidv4 } from 'uuid';
 
 const StyledControlPanel = styled.div`
     width: 100%;
@@ -9,26 +8,15 @@ const StyledControlPanel = styled.div`
 `;
 
 
-const times = [1, 2, 3, 5];
-
-
-function ControlPanel({createTask, timeValue, setTimeValue}) {
+function ControlPanel({createTask}) {
 
 
   return (
     <StyledControlPanel>
         <div>
-            {times.map(time => (
-                
-                <button key={uuidv4()} onClick={() => setTimeValue(time)}>
-                    {time + "h"}
-                </button>
-            ))}
-        </div>
-        <div>
 
         <button>
-            Delete
+            Clear
         </button>
 
         <button onClick={() => createTask()}>

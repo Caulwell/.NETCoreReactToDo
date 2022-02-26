@@ -27,30 +27,40 @@ function App() {
 
   const [tasks, setTasks] = useState([]);
 
-  const [initialRender, setInitialRender] = useState(true);
 
-
+  // get saved tasks on initial render
   useEffect(() => {
-      console.log("initial render to api");
       fetch('http://localhost:5025/api/Todoitems', {method: "GET"})
       .then(response => response.json())
       .then(data => setTasks(data));
 
-      setInitialRender(false);
-
   }, []);
 
 
+  // create new task
   const createTask = (name, time) => {
-
-    setTasks([...tasks, {name, time}]);
 
     fetch('http://localhost:5025/api/Todoitems', {
     method: "POST",
     headers: {'Content-Type': 'application/json'},
     body: JSON.stringify({name, time})
   })
-    .then(response => console.log(response));
+    .then(response => response.json())
+    .then(data => setTasks([...tasks, data]));
+  };
+
+  // delete task
+  const deleteTask = (task) => {
+
+    fetch(`http://localhost:5025/api/Todoitems/${task.id}`, {
+            method: "DELETE"
+          })
+            .then(response => console.log(response));
+
+    setTasks(tasks.filter(element => {
+      return element !== task;
+    }));
+
   };
 
 
@@ -62,7 +72,7 @@ function App() {
         <button>settings</button> 
       </Header>
       <TaskMaker createTask={createTask}/>
-      <TaskList tasks={tasks}/>
+      <TaskList tasks={tasks} deleteTask={deleteTask}/>
     </StyledApp>
   );
 }

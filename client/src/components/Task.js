@@ -20,47 +20,34 @@ const StyledTaskMain = styled.div`
     display: flex;
     justify-content: space-between;
 `;
-const examples = [
-
-    {
-        name: "Do the dishes",
-        time: 5
-    },
-    {
-        name: "Learn .NET",
-        time: 1
-    },
-    {
-        name: "Go to the park",
-        time: 2
-    }
-];
 
 
-
-function Task({name, time}) {
-
-
-  return (
-    <StyledTask>
-
-    <div>
-    <h1>{time}</h1>
+function Task({task, deleteTask}) {
     
-    </div>
 
-    <StyledTaskMain>
-    <h1>{name}</h1>
-    <div>
-        <button>Edit</button>
-        <button>Bin</button>
-    </div>
+    const handleBin = () => {
 
-    </StyledTaskMain>
-   
+        deleteTask(task);
 
-    </StyledTask>
-  );
+        
+    };
+
+    return (
+        <StyledTask>
+
+        <StyledTaskMain>
+        <h1>{task.name}</h1>
+        <div>
+            {"" + task.isComplete}
+            <button>Edit</button>
+            <button onClick={() => handleBin()}>Bin</button>
+        </div>
+
+        </StyledTaskMain>
+    
+
+        </StyledTask>
+    );
 }
 
 export default Task;
