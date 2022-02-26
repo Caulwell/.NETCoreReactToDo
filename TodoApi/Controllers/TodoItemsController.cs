@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using TodoApi.Data;
 using TodoApi.Models;
 
 namespace TodoApi.Controllers
@@ -8,9 +9,9 @@ namespace TodoApi.Controllers
     [ApiController]
     public class TodoItemsController : ControllerBase
     {
-        private readonly TodoContext _context;
+        private readonly TodoItemsDB _context;
 
-        public TodoItemsController(TodoContext context)
+        public TodoItemsController(TodoItemsDB context)
         {
             _context = context;
         }

@@ -1,9 +1,12 @@
 using Microsoft.EntityFrameworkCore;
+using TodoApi.Data;
 using TodoApi.Models;
 
 
 var  MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 var builder = WebApplication.CreateBuilder(args);
+
+var connectionString = builder.Configuration.GetConnectionString("TodoItems") ?? "Data Source=TodoItems.db";
 
 builder.Services.AddCors(options =>
 {
@@ -21,8 +24,7 @@ builder.Services.AddCors(options =>
 // Add services to the container.
 
 builder.Services.AddControllers();
-builder.Services.AddDbContext<TodoContext>(opt =>
-    opt.UseInMemoryDatabase("TodoList"));
+builder.Services.AddSqlite<TodoItemsDB>(connectionString);
 
 builder.Services.AddSwaggerGen(c =>
 {
