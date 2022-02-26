@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Mvc;
 namespace server.Controllers;
 
 [ApiController]
-[Route("api/[controller]")]
 public class ToDoItemController : ControllerBase
 {
     public ToDoItemController()
@@ -17,6 +16,7 @@ public class ToDoItemController : ControllerBase
 
     // GET All
     [HttpGet]
+    [Route("api/getAll")]
     public ActionResult<List<ToDoItem>> GetAll()
     {
         return ToDoItemService.GetAll();
@@ -24,6 +24,8 @@ public class ToDoItemController : ControllerBase
     }   
     // ADD A TODO ITEM
     [HttpPost]
+    [Route("api/add")]
+    [Consumes("application/json")]
     public IActionResult Create(ToDoItem toDoItem)
     {            
         ToDoItemService.Add(toDoItem);

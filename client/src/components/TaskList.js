@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { v4 as uuidv4 } from 'uuid';
 import styled from "styled-components";
 import Task from "./Task";
 
@@ -16,7 +17,7 @@ function TaskList({tasks}) {
     <StyledTaskList>
 
     {tasks.map(task => (
-        <Task name={task.name} time={task.time}/>
+        <Task key={uuidv4()} name={task.name} time={task.time}/>
     ))}
 
     </StyledTaskList>
