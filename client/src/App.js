@@ -63,8 +63,8 @@ function App() {
 
   };
 
-  // toggle complete
-  const toggleComplete = (task) => {
+  // editTask
+  const editTask = (task) => {
 
     fetch(`http://localhost:5025/api/Todoitems/${task.id}`, {
     method: "PUT",
@@ -84,8 +84,6 @@ function App() {
      let foundIndex = tasksCopy.findIndex(element => element.id === task.id);
      tasksCopy[foundIndex] = task;
      setTasks(tasksCopy);
-
-
   }
 
 
@@ -97,7 +95,7 @@ function App() {
         <button>settings</button> 
       </Header>
       <TaskMaker createTask={createTask}/>
-      <TaskList tasks={tasks} deleteTask={deleteTask} toggleComplete={toggleComplete}/>
+      <TaskList tasks={tasks} deleteTask={deleteTask} editTask={editTask}/>
     </StyledApp>
   );
 }

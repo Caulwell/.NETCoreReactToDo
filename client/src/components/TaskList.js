@@ -10,14 +10,14 @@ const StyledTaskList = styled.div`
 `;
 
 
-function TaskList({tasks, deleteTask, toggleComplete}) {
+function TaskList({tasks, deleteTask, editTask}) {
 
 
   return (
     <StyledTaskList>
 
     {tasks.map(task => (
-        <Task key={"task"+task.id} task={task} deleteTask={deleteTask} toggleComplete={toggleComplete}/>
+        <Task key={"task"+task.id} task={task} deleteTask={deleteTask} editTask={editTask}/>
     ))}
 
     </StyledTaskList>

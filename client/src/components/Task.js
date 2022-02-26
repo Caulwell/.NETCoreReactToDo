@@ -22,7 +22,11 @@ const StyledTaskMain = styled.div`
 `;
 
 
-function Task({task, deleteTask, toggleComplete}) {
+function Task({task, deleteTask, editTask}) {
+
+    const [editing, setEditing] = useState(false);
+
+    const [inputValue, setInputValue] = useState(task.name);
     
 
     const handleBin = () => {
@@ -30,20 +34,54 @@ function Task({task, deleteTask, toggleComplete}) {
     };
 
     const handleComplete = () => {
-        task.isComplete = !task.isComplete;
-        toggleComplete(task);
+        let taskCopy = {...task};
+        taskCopy.isComplete = !taskCopy.isComplete;
+        editTask(taskCopy);
     };
+
+    const handleEditMode = () => {
+        if(editing){
+            setInputValue(task.name);
+            setEditing(false);
+        } else {
+            setEditing(true);
+        }
+    };
+
+    const handleEdit = () => {
+        let taskCopy = {...task};
+        taskCopy.name = inputValue;
+        editTask(taskCopy);
+        setEditing(false);
+    }
 
     return (
         <StyledTask>
 
         <StyledTaskMain>
-        <h1>{task.name}</h1>
-        <div>
-            <button onClick={() => handleComplete()}>{task.isComplete ? "Not Complete" : "Complete"}</button>
-            <button>Edit</button>
-            <button onClick={() => handleBin()}>Bin</button>
-        </div>
+        {editing ? 
+        
+        <>
+            <input onChange={e => setInputValue(e.target.value)} value={inputValue}></input>
+            <button onClick={() => handleEdit()}>Save</button>
+            <button onClick={() => handleEditMode()}>Cancel</button>
+        </>
+
+        :
+        <>
+            <h1>{task.name}</h1>
+            <div>
+                <button onClick={() => handleComplete()}>{task.isComplete ? "Not Complete" : "Complete"}</button>
+                <button onClick={() => handleEditMode()}>Edit</button>
+                <button onClick={() => handleBin()}>Bin</button>
+            </div>
+        </>
+       
+       
+        
+
+        }
+        
 
         </StyledTaskMain>
     
