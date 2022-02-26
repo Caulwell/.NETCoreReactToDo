@@ -63,6 +63,31 @@ function App() {
 
   };
 
+  // toggle complete
+  const toggleComplete = (task) => {
+
+    fetch(`http://localhost:5025/api/Todoitems/${task.id}`, {
+    method: "PUT",
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify(task)
+  })
+    .then(response => console.log(response));
+
+    
+  //   fetch(`http://localhost:5025/api/Todoitems/${task.id}`, {
+  //   method: "GET"
+  // })
+  //   .then(response => response.json())
+  //   .then(data => task = data);
+
+     let tasksCopy = [...tasks];
+     let foundIndex = tasksCopy.findIndex(element => element.id === task.id);
+     tasksCopy[foundIndex] = task;
+     setTasks(tasksCopy);
+
+
+  }
+
 
   return (
     <StyledApp className="App">
@@ -72,7 +97,7 @@ function App() {
         <button>settings</button> 
       </Header>
       <TaskMaker createTask={createTask}/>
-      <TaskList tasks={tasks} deleteTask={deleteTask}/>
+      <TaskList tasks={tasks} deleteTask={deleteTask} toggleComplete={toggleComplete}/>
     </StyledApp>
   );
 }

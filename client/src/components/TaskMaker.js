@@ -1,6 +1,5 @@
 import { useState } from "react";
 import styled from "styled-components";
-import ControlPanel from "./ControlPanel";
 
 const StyledTaskMaker = styled.div`
     margin-top: 1rem;
@@ -42,7 +41,9 @@ function TaskMaker({createTask}) {
 
         </Input>
 
-        <ControlPanel createTask={handleCreateTask}/>
+        <button onClick={() => handleCreateTask()}>
+            Create
+        </button>
         
     </StyledTaskMaker>
   );

@@ -22,14 +22,16 @@ const StyledTaskMain = styled.div`
 `;
 
 
-function Task({task, deleteTask}) {
+function Task({task, deleteTask, toggleComplete}) {
     
 
     const handleBin = () => {
+        deleteTask(task);  
+    };
 
-        deleteTask(task);
-
-        
+    const handleComplete = () => {
+        task.isComplete = !task.isComplete;
+        toggleComplete(task);
     };
 
     return (
@@ -38,7 +40,7 @@ function Task({task, deleteTask}) {
         <StyledTaskMain>
         <h1>{task.name}</h1>
         <div>
-            {"" + task.isComplete}
+            <button onClick={() => handleComplete()}>{task.isComplete ? "Not Complete" : "Complete"}</button>
             <button>Edit</button>
             <button onClick={() => handleBin()}>Bin</button>
         </div>
