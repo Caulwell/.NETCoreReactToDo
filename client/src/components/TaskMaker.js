@@ -62,14 +62,27 @@ function TaskMaker({createTask}) {
 
     }
 
+    const handleKeyDown = e => {
+
+        if(e.key === "Enter"){
+            handleCreateTask();
+        } else {
+            return;
+        }
+    };
+
   
 
 
   return (
     <StyledTaskMaker>
-        <Input value={inputValue} onChange={e => setInputValue(e.target.value)} type="text" placeholder="Create a new task">
-
-        </Input>
+        <Input 
+            value={inputValue} 
+            onChange={e => setInputValue(e.target.value)} 
+            type="text" 
+            placeholder="Create a new task"
+            onKeyDown={e => handleKeyDown(e)}
+        />
 
         <OptionsDiv>
             <Button onClick={() => handleCreateTask()}>
