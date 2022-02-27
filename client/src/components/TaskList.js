@@ -1,5 +1,4 @@
-import { useState } from "react";
-import { v4 as uuidv4 } from 'uuid';
+import { useEffect, useState } from "react";
 import styled from "styled-components";
 import Task from "./Task";
 import { ChevronDown, ChevronUp } from "../svg/svgs";
@@ -28,16 +27,18 @@ const NoContentDiv = styled.div`
   padding: 2rem;
 `;
 
-
-function TaskList({tasks, deleteTask, editTask}) {
-
-  const Collapseable = ({tasks, complete}) => {
+  const Collapseable = ({tasks, complete, deleteTask, editTask}) => {
 
     const [collapsed, setCollapsed] = useState(false);
 
     const handleCollapse = () => {
       setCollapsed(!collapsed);
     };
+
+    useEffect(() => {
+
+      setCollapsed(false);
+    },[tasks])
         
     return (
 
@@ -45,7 +46,7 @@ function TaskList({tasks, deleteTask, editTask}) {
 
           <StyledCollapseDiv onClick={() => handleCollapse()}>
             {complete ? "Completed Tasks" : "Incomplete Tasks"}
-            {collapsed ? <ChevronUp/> : <ChevronDown/>}
+            {collapsed ? <ChevronDown/> : <ChevronUp/>}
           </StyledCollapseDiv>
 
         {!collapsed ?
@@ -64,11 +65,26 @@ function TaskList({tasks, deleteTask, editTask}) {
 }
 
 
+function TaskList({tasks, deleteTask, editTask}) {
+
+
+
+
   return (
     <StyledTaskList>
 
-    <Collapseable complete={false} tasks={tasks.filter(task => !task.isComplete)}/>
-    <Collapseable complete={true} tasks={tasks.filter(task => task.isComplete)}/>
+      <Collapseable
+        deleteTask={deleteTask}
+        editTask={editTask} 
+        complete={false} 
+        tasks={tasks.filter(task => !task.isComplete)}
+        />
+      <Collapseable 
+        deleteTask={deleteTask}
+        editTask={editTask} 
+        complete={true} 
+        tasks={tasks.filter(task => task.isComplete)}
+        />
 
     </StyledTaskList>
   );
