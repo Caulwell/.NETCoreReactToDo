@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import styled from "styled-components";
+import PopupMenu from "./components/PopupMenu";
 import TaskList from "./components/TaskList";
 import TaskMaker from "./components/TaskMaker";
 import {menu} from "./svg/svgs";
@@ -44,6 +45,22 @@ const Button = styled.button`
 function App() {
 
   const [tasks, setTasks] = useState([]);
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [menuPosition, setMenuPosition] = useState([{top: 0, left: 0}]);
+
+  const menuButtonRef = useRef(null);
+
+
+  const handleMenuOpen = () => {
+
+    const menuButtonPosition = menuButtonRef.current.getBoundingClientRect();
+    setMenuPosition({
+      top: menuButtonPosition.top + 40 +"px", 
+      left: menuButtonPosition.left-134+"px"});
+    setMenuOpen(!menuOpen);
+
+
+  }
 
 
   // get saved tasks on initial render
@@ -90,14 +107,6 @@ function App() {
     body: JSON.stringify(task)
   })
     .then(response => console.log(response));
-
-    
-  //   fetch(`http://localhost:5025/api/Todoitems/${task.id}`, {
-  //   method: "GET"
-  // })
-  //   .then(response => response.json())
-  //   .then(data => task = data);
-
      let tasksCopy = [...tasks];
      let foundIndex = tasksCopy.findIndex(element => element.id === task.id);
      tasksCopy[foundIndex] = task;
@@ -109,7 +118,8 @@ function App() {
     <StyledApp className="App">
       <Header>
         <h1>QuickTask</h1>
-        <Button>{menu()}</Button> 
+        <Button ref={menuButtonRef} onClick={() => handleMenuOpen()}>{menu()}</Button>
+        {menuOpen && <PopupMenu position={menuPosition}/>} 
       </Header>
       <TaskMaker createTask={createTask}/>
       <TaskList tasks={tasks} deleteTask={deleteTask} editTask={editTask}/>
