@@ -1,20 +1,23 @@
 import { useState } from "react";
 import styled from "styled-components";
-import {bin, pen, save, tick} from "../svg/svgs";
+import {bin, pen, save, Tick} from "../svg/svgs";
+
 
 
 
 const StyledTask = styled.div`
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-    transition: 0.3s;
-    box-sizing: border-box;
-    padding: 1rem;
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 2rem;
-
+transition: 0.3s;
+box-sizing: border-box;
+padding: 1rem;
+width: 100%;
+display: flex;
+justify-content: space-between;
+align-items: center;
+margin-top: 2rem;
+box-shadow: ${({ complete }) => 
+    (complete ? "0 0 12px lime;" 
+    : 
+    "0 4px 8px 0 rgba(0,0,0,0.2);")};
 `;
 
 
@@ -40,6 +43,7 @@ const ButtonGroup = styled.div`
 
 
 function Task({task, deleteTask, editTask}) {
+
 
     const [editing, setEditing] = useState(false);
 
@@ -73,7 +77,7 @@ function Task({task, deleteTask, editTask}) {
     };
 
     return (
-        <StyledTask>
+        <StyledTask complete={task.isComplete}>
 
         
         {editing ? 
@@ -88,10 +92,12 @@ function Task({task, deleteTask, editTask}) {
         <>
             <h1>{task.name}</h1>
             <ButtonGroup>
-                <Button onClick={() => handleComplete()}>{tick()}</Button>
+                <Button onClick={() => handleComplete()}>
+                    <Tick complete={task.isComplete}/>                
+                </Button>
                 <Button onClick={() => handleEditMode()}>{pen()}</Button>
                 <Button onClick={() => handleBin()}>{bin()}</Button>
-                </ButtonGroup>
+            </ButtonGroup>
         </>
        
        
