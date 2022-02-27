@@ -13,11 +13,19 @@ const StyledTaskList = styled.div`
 const StyledCollapseDiv = styled.div`
   display: flex;
   align-items: center;
-  margin-top: 2rem;
+  margin-top: 1rem;
   justify-content: space-between;
-  &:hover{
-    cursor:pointer;
-  }
+  border-bottom: 1px solid #ccc;
+  border-top: 1px solid #ccc;
+  border-radius: 3px;
+  rgba(0,0,0,0.2);
+  height: 3rem;
+  transition: all 150ms ease-in-out;
+  padding: 0 1rem;
+    &:hover{
+        cursor: pointer;
+        
+    }
 `;
 
 const NoContentDiv = styled.div`
@@ -26,6 +34,29 @@ const NoContentDiv = styled.div`
   justify-content: center;
   padding: 2rem;
 `;
+
+function TaskList({tasks, deleteTask, editTask}) {
+
+
+  return (
+    <StyledTaskList>
+
+      <Collapseable
+        deleteTask={deleteTask}
+        editTask={editTask} 
+        complete={false} 
+        tasks={tasks.filter(task => !task.isComplete)}
+        />
+      <Collapseable 
+        deleteTask={deleteTask}
+        editTask={editTask} 
+        complete={true} 
+        tasks={tasks.filter(task => task.isComplete)}
+        />
+
+    </StyledTaskList>
+  );
+}
 
   const Collapseable = ({tasks, complete, deleteTask, editTask}) => {
 
@@ -38,6 +69,7 @@ const NoContentDiv = styled.div`
     useEffect(() => {
 
       setCollapsed(false);
+      console.log("tasks for : " + complete + " has changed");
     },[tasks])
         
     return (
@@ -65,29 +97,6 @@ const NoContentDiv = styled.div`
 }
 
 
-function TaskList({tasks, deleteTask, editTask}) {
 
-
-
-
-  return (
-    <StyledTaskList>
-
-      <Collapseable
-        deleteTask={deleteTask}
-        editTask={editTask} 
-        complete={false} 
-        tasks={tasks.filter(task => !task.isComplete)}
-        />
-      <Collapseable 
-        deleteTask={deleteTask}
-        editTask={editTask} 
-        complete={true} 
-        tasks={tasks.filter(task => task.isComplete)}
-        />
-
-    </StyledTaskList>
-  );
-}
 
 export default TaskList;

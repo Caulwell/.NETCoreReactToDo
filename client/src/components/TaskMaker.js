@@ -34,6 +34,7 @@ const OptionsDiv = styled.div`
 `;
 
 const Button = styled.button`
+    transition: all 150ms ease-in-out;
     border-radius: 7%;
     height: 2.2rem;
     width: 6rem;
@@ -43,8 +44,10 @@ const Button = styled.button`
     align-items: center;
     &:hover{
         cursor: pointer;
+        box-shadow: 0 0 1px 1px grey;
     }
 `;
+
 
 
 

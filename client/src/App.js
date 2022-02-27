@@ -31,8 +31,10 @@ const Button = styled.button`
     display: flex;
     justify-content: center;
     align-items: center;
+    transition: all 150ms ease-in-out;
     &:hover{
         cursor: pointer;
+        box-shadow: 0 0 1px 1px grey;
     }
 `;
 
