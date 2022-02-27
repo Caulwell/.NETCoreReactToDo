@@ -9,7 +9,8 @@ const StyledPopupMenu = styled.div`
     top: ${props => props.position.top};
     left: ${props => props.position.left};
     z-index: 50;
-    background-color: #FAF9F6;
+    background: ${({ theme }) => theme.background};
+    color: ${({ theme }) => theme.text};
     box-shadow: 0 0 4px rgba(0,0,0,0.2);
     padding: 0.5rem;
 `;
@@ -29,16 +30,27 @@ const MenuItem = styled.div`
     padding: 0.7rem 0;
 `;
 
+const Button = styled.button`
+    background: ${({ theme }) => theme.background};
+    color: ${({ theme }) => theme.text};
+    border-radius: 10px;
+    cursor: pointer;
+    font-size:0.8rem;
+    padding: 0.6rem;  
+`;
 
 
-function PopupMenu({position}) {
+
+function PopupMenu({theme, themeName, position, themeToggler}) {
+
+    console.log(theme.background);
 
     return (
         <StyledPopupMenu position={position}>
         <MenuTitle>Settings</MenuTitle>
             <ul>
                 <MenuItem>
-                    Dark Mode <button>Dark</button>
+                    Dark Mode <Button theme={theme} onClick={() => themeToggler()}>{themeName === "light" ? "On" : "Off"}</Button>
                 </MenuItem>
                 <MenuItem>
                     Github Link

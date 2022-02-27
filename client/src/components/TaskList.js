@@ -11,6 +11,8 @@ const StyledTaskList = styled.div`
 `;
 
 const StyledCollapseDiv = styled.div`
+  background: ${({ theme }) => theme.background};
+  color: ${({ theme }) => theme.text};
   display: flex;
   align-items: center;
   margin-top: 1rem;

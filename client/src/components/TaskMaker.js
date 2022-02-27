@@ -13,9 +13,13 @@ const StyledTaskMaker = styled.div`
     justify-content: space-between;
     border-radius: 3px;
     padding: 0.4rem;
+    background: ${({ theme }) => theme.background};
+    color: ${({ theme }) => theme.text};
 `;
 
 const Input = styled.input`
+    background: ${({ theme }) => theme.background};
+    color: ${({ theme }) => theme.text};
     font-size: 1.5rem;
     flex-grow: 2;
     border: none;
@@ -34,6 +38,8 @@ const OptionsDiv = styled.div`
 `;
 
 const Button = styled.button`
+    background: ${({ theme }) => theme.background};
+    color: ${({ theme }) => theme.text};
     transition: all 150ms ease-in-out;
     border-radius: 7%;
     height: 2.2rem;

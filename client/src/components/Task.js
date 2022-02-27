@@ -6,6 +6,8 @@ import {bin, pen, save, Tick} from "../svg/svgs";
 
 
 const StyledTask = styled.div`
+background: ${({ theme }) => theme.background};
+color: ${({ theme }) => theme.text};
 transition: 0.3s;
 box-sizing: border-box;
 padding: 1rem;
@@ -22,7 +24,8 @@ box-shadow: ${({ complete }) =>
 
 
 const Button = styled.button`
-
+    background: ${({ theme }) => theme.background};
+    color: ${({ theme }) => theme.text};
     border-radius: 50%;
     height: 2rem;
     width: 2rem;

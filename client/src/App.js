@@ -1,8 +1,12 @@
 import { useState, useEffect, useRef } from "react";
+import { ThemeProvider } from "styled-components";
+import { GlobalStyles } from "./components/globalStyles";
+import { lightTheme, darkTheme } from "./components/Themes";
 import styled from "styled-components";
 import PopupMenu from "./components/PopupMenu";
 import TaskList from "./components/TaskList";
 import TaskMaker from "./components/TaskMaker";
+import  {useDarkMode} from "./components/useDarkMode"
 import {menu} from "./svg/svgs";
 
 
@@ -33,6 +37,8 @@ const Button = styled.button`
     justify-content: center;
     align-items: center;
     transition: all 150ms ease-in-out;
+    background: ${({ theme }) => theme.background};
+    color: ${({ theme }) => theme.text};
     &:hover{
         cursor: pointer;
         box-shadow: 0 0 1px 1px grey;
@@ -47,6 +53,10 @@ function App() {
   const [tasks, setTasks] = useState([]);
   const [menuOpen, setMenuOpen] = useState(false);
   const [menuPosition, setMenuPosition] = useState([{top: 0, left: 0}]);
+  const [theme, themeToggler] = useDarkMode();
+
+  const themeMode = theme === 'light' ? lightTheme : darkTheme;
+  
 
   const menuButtonRef = useRef(null);
 
@@ -58,9 +68,8 @@ function App() {
       top: menuButtonPosition.top + 40 +"px", 
       left: menuButtonPosition.left-134+"px"});
     setMenuOpen(!menuOpen);
-
-
   }
+
 
 
   // get saved tasks on initial render
@@ -115,15 +124,21 @@ function App() {
 
 
   return (
-    <StyledApp className="App">
-      <Header>
-        <h1>QuickTask</h1>
-        <Button ref={menuButtonRef} onClick={() => handleMenuOpen()}>{menu()}</Button>
-        {menuOpen && <PopupMenu position={menuPosition}/>} 
-      </Header>
-      <TaskMaker createTask={createTask}/>
-      <TaskList tasks={tasks} deleteTask={deleteTask} editTask={editTask}/>
-    </StyledApp>
+    <ThemeProvider theme={themeMode}>
+      <>
+        <GlobalStyles/>
+        <StyledApp className="App">
+          <Header>
+          <h1>QuickTask</h1>
+          <Button ref={menuButtonRef} onClick={() => handleMenuOpen()}>{menu()}</Button>
+          {menuOpen && <PopupMenu themeName={theme} theme={themeMode} position={menuPosition} themeToggler={themeToggler}/>} 
+          </Header>
+          <TaskMaker  createTask={createTask}/>
+          <TaskList  tasks={tasks} deleteTask={deleteTask} editTask={editTask}/>
+      </StyledApp>
+      </>
+    </ThemeProvider>
+    
   );
 }
 
